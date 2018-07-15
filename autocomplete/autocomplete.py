@@ -54,12 +54,17 @@ def this_word_given_last(first_word, second_word, top_n=10):
     words prefixed by the input GIVEN the occurence of the last word"""
 
     #Hidden step
-    possible_second_words = [second_word[:-1]+char
-                             for char in NEARBY_KEYS[second_word[-1]]
-                             if len(second_word) > 2]
+    # possible_second_words = [second_word[:-1]+char
+    #                          for char in NEARBY_KEYS[second_word[-1]]
+    #                          if len(second_word) > 2]
 
-    possible_second_words.append(second_word)
+    # possible_second_words.append(second_word)
 
+    possible_second_words = [second_word]
+
+    if first_word.lower() not in models.WORD_TUPLES_MODEL:
+        return this_word(second_word, top_n)
+    
     probable_words = {w:c for w, c in
                       models.WORD_TUPLES_MODEL[first_word.lower()].items()
                       for sec_word in possible_second_words

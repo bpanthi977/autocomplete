@@ -34,8 +34,10 @@ def train_models(corpus, model_name="models_compressed.pkl"):
     # "preperation" step
     # word is in WORDS
     global WORDS
-    WORDS = helpers.re_split(corpus)
 
+    WORDS = helpers.re_split(corpus)
+    print ("Total words: ", len(WORDS))
+    
     # first model -> P(word)
     global WORDS_MODEL
     WORDS_MODEL = collections.Counter(WORDS)
@@ -50,6 +52,7 @@ def train_models(corpus, model_name="models_compressed.pkl"):
     WORD_TUPLES_MODEL = {first:collections.Counter()
                          for first, second in WORD_TUPLES}
 
+    print ("Word Pairs: ", len(WORD_TUPLES_MODEL))
     for tup in WORD_TUPLES:
         try:
             WORD_TUPLES_MODEL[tup[0]].update([tup[1]])
@@ -59,16 +62,6 @@ def train_models(corpus, model_name="models_compressed.pkl"):
 
     if model_name:
         save_models(os.path.join(os.path.dirname(__file__), model_name))
-
-
-def train_bigtxt():
-    """unnecessary helper function for training against
-    default corpus data (big.txt)"""
-
-    bigtxtpath = os.path.join(os.path.dirname(__file__), 'big.txt')
-    with open(bigtxtpath, 'rb') as bigtxtfile:
-
-        train_models(str(bigtxtfile.read()))
 
 
 def save_models(path=None):
@@ -85,6 +78,17 @@ def save_models(path=None):
                 open(path, 'wb'),
                 protocol=2)
 
+
+
+
+def train_bigtxt():
+    """unnecessary helper function for training against
+    default corpus data (big.txt)"""
+
+    bigtxtpath = os.path.join(os.path.dirname(__file__), 'bigNepali.txt')
+    with open(bigtxtpath, 'r') as bigtxtfile:
+
+        train_models(str(bigtxtfile.read()))
 
 def load_models(load_path=None):
     """Load autocomplete's built-in model (uses Norvig's big.txt). Optionally

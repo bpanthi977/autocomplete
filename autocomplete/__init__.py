@@ -52,10 +52,22 @@ def run_server(port_num=8080):
 
     debug(True)
 
-    @route('/<first_word>/<second_word>')
-    def index(first_word, second_word):
-        return dict(predict(first_word, second_word))
+    @route('/<first_word>/<second_word>/<n>')
+    def p2(first_word, second_word, n):
+        if (n != ""):
+            n = int(n)
+        else:
+            n = 10 
+        return dict(predict(first_word, second_word, n))
 
+    @route('/<partial_word>/<n>')
+    def partialPredict(partial_word, n ):
+        if (n != ""):
+            n = int(n)
+        else:
+            n = 10
+        return dict(predict(partial_word, False, n))
+    
     run(host='localhost', port=port_num)
 
 

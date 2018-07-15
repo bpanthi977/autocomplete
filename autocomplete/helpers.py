@@ -6,7 +6,9 @@ import re
 def norm_rsplit(text,n): return text.lower().rsplit(' ', n)[-n:]
 
 #http://norvig.com/spell-correct.html
-def re_split(text): return re.findall('[a-z]+', text.lower())
+# def re_split(text): return re.findall('[a-z]+', text.lower())
+def re_split(text): return re.findall('[\u0900-\u0963\u0966-\u097f]+', text.lower())
+
 
 #http://stackoverflow.com/questions/312443/how-do-you-split-a-list-into-evenly-sized-chunks-in-python
 #https://github.com/rrenaud/Gibberish-Detector/blob/master/gib_detect_train.py#L16
