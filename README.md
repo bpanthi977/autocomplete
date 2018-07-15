@@ -19,4 +19,4 @@ Now head over to http://localhost:8080/नेपा/10 for non-contextual comple
 and to http://localhost:8080/मेरो/क/10 for completion based on preceding word.
 
 ### note
-The data (nepali text corpus) was collected from (about 36 thousands) news snippets from various online portals over.
+The data (nepali text corpus) was collected from (about 36 thousands) news snippets from various online portals.
